@@ -12,6 +12,10 @@ class ViewController: UIViewController {
     
     var calculationArray: [String] = []
     
+    var executeCalculation: [String] = [""]
+    
+    var functionsPressedTwice = false
+    
     // initialize storyboard components
     @IBOutlet var numberButtons: [UIButton]!
     @IBOutlet var functionButtons: [UIButton]!
@@ -96,33 +100,35 @@ class ViewController: UIViewController {
         
         /* Retrieve proper math function */
         
-        var calculation: String = ""
-        
-        let functionName = sender.title(for: .normal)!
-        
-        // conditional statement to execute a specific function based on the button title
-        switch functionName {
-        case "÷":
-            // code goes here
-            // print("Divide")
-            calculation = "Divide"
-        case "x":
-            // print("Multiply")
-            calculation = "Multiply"
-        case "-":
-            // print("Subtract")
-            calculation = "Subtract"
-        case "+":
-            // print("Add")
-            calculation = "Add"
-        case "=":
-            // print("Equals")
-            calculation = "Equals"
-        default:
-            print("Error")
-        }
+        let calculation = sender.title(for: .normal)!
         
         print("What calculation should happen?:", calculation)
+        
+        if calculation == "=" {
+            //print(executeCalculation)
+            // call the method that totals
+            total(firstNumber: calculationArray[0], secondNumber: calculationArray[1], calculation: executeCalculation[0])
+            executeCalculation.removeAll() // remove all calculations inserted into executeCalculation array
+        } else {
+            // insert calculations to executeCalculation array at index 0
+            executeCalculation.insert(calculation, at: 0)
+        }
+        
+        
+        /* Implement functionality where it calculates total on second button press */
+        
+        if (calculation != "=") {
+            if (!functionsPressedTwice) {
+                functionsPressedTwice = true // set value to true
+            } else {
+                print("Second time clicking the functions")
+                
+                // call method to calculate total and push total value to index 0
+                total(firstNumber: calculationArray[0], secondNumber: calculationArray[1], calculation: executeCalculation[0])
+            }
+        }
+        
+        
         
         
     }
@@ -146,6 +152,40 @@ class ViewController: UIViewController {
         } else {
             return 0
         }
+        
+    }
+    
+    // method that calculates total
+    func total(firstNumber: String, secondNumber: String, calculation: String) {
+        
+        let formattedFirstNum = Double(firstNumber) ?? 0
+        let formattedSecondNum = Double(secondNumber) ?? 0
+        
+        var total: Double = 0
+        
+        // conditional statement to execute a specific function based on calculation passed
+        switch calculation {
+        case "÷":
+            // Divide
+            total = formattedFirstNum / formattedSecondNum
+        case "x":
+            // Multiply
+            total = formattedFirstNum * formattedSecondNum
+        case "-":
+            // Subtract
+            total = formattedFirstNum - formattedSecondNum
+        case "+":
+            // Add
+            total = formattedFirstNum + formattedSecondNum
+        default:
+            print("Error")
+        }
+        
+        print("The total is:", total)
+        
+        calculationArray[0] = String(total)
+        
+        calculationArray.remove(at: 1)
         
     }
     
