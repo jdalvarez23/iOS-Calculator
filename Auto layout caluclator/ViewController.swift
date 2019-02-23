@@ -37,8 +37,11 @@ class ViewController: UIViewController {
         
         
         if (calculationArray.count > 0) {
+            
+            let arrayIndex = checkArray(numberArray: calculationArray)
+            
             // retrieve the number
-            var arrayNumber = calculationArray[0] // retrieve the value from the array at index 0
+            var arrayNumber = calculationArray[arrayIndex] // retrieve the value from the array at index 0
             
             print("Number from array:", arrayNumber)
             
@@ -47,7 +50,7 @@ class ViewController: UIViewController {
             
             print("New number:", arrayNumber)
             
-            calculationArray[0] = arrayNumber // push modified arrayNumber to the array
+            calculationArray[arrayIndex] = arrayNumber // push modified arrayNumber to the array
             
             
             
@@ -86,6 +89,40 @@ class ViewController: UIViewController {
     
     // method that executes when a function button is pressed
     @IBAction func functionButtonsPressed(_ sender: UIButton) {
+        
+        /* Create new value in calculationsArray */
+        
+        calculationArray.append("")
+        
+        /* Retrieve proper math function */
+        
+        var calculation: String = ""
+        
+        let functionName = sender.title(for: .normal)!
+        
+        // conditional statement to execute a specific function based on the button title
+        switch functionName {
+        case "÷":
+            // code goes here
+            // print("Divide")
+            calculation = "Divide"
+        case "x":
+            // print("Multiply")
+            calculation = "Multiply"
+        case "-":
+            // print("Subtract")
+            calculation = "Subtract"
+        case "+":
+            // print("Add")
+            calculation = "Add"
+        case "=":
+            // print("Equals")
+            calculation = "Equals"
+        default:
+            print("Error")
+        }
+        
+        print("What calculation should happen?:", calculation)
         
         
     }
