@@ -39,6 +39,8 @@ class ViewController: UIViewController {
         
         print("Number pressed:", number)
         
+        // insert call to update user interface here
+        
         
         if (calculationArray.count > 0) {
             
@@ -57,33 +59,10 @@ class ViewController: UIViewController {
             calculationArray[arrayIndex] = arrayNumber // push modified arrayNumber to the array
             
             
-            
-            
         } else {
             calculationArray.append(number)
         }
         
-        
-        
-        
-        /*
-        let arrayIndex = checkArray(numberArray: calculationArray) */
-        
-        // print("Index:", arrayIndex)
-        
-        
-        
-        
-        
-        
-        
-        /*
-        if (arrayIndex == 0) {
-            calculationArray.append(formattedNumber)
-        } else {
-            calculationArray[arrayIndex] = formattedNumber
-        }
-        */
  
         print(calculationArray)
         
@@ -182,6 +161,10 @@ class ViewController: UIViewController {
         }
         
         print("The total is:", total)
+        
+        // insert call to update user interface here
+        
+        /* [NOTE] We can actually remove the following two lines and simply display the number in the label and if the user justs presses a function button then we can add the number in the label back to the calculations array */
         
         calculationArray[0] = String(total)
         
