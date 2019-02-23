@@ -50,6 +50,9 @@
                                                 <state key="normal" title="C">
                                                     <color key="titleColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clearButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t7e-Nh-6h7"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oQJ-y2-beg">
                                                 <rect key="frame" x="96" y="0.0" width="86" height="104.33333333333333"/>
@@ -282,7 +285,10 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="clearButton" destination="BxK-YO-5hD" id="HQa-bL-azU"/>
                         <outlet property="decimalButton" destination="QQD-7c-zK8" id="K9k-ZI-Xp7"/>
+                        <outlet property="percentButton" destination="uX8-II-N8w" id="UDv-h2-LlE"/>
+                        <outlet property="plusMinusButton" destination="oQJ-y2-beg" id="0ct-g8-DNW"/>
                         <outletCollection property="numberButtons" destination="pJV-01-40a" collectionClass="NSMutableArray" id="qoi-2C-Din"/>
                         <outletCollection property="numberButtons" destination="Wh0-l7-onD" collectionClass="NSMutableArray" id="aEg-zt-swj"/>
                         <outletCollection property="numberButtons" destination="5rI-uR-9as" collectionClass="NSMutableArray" id="eKN-Kt-btE"/>

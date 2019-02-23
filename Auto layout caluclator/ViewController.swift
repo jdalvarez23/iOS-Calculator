@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     @IBOutlet var functionButtons: [UIButton]!
     @IBOutlet weak var decimalButton: UIButton!
     @IBOutlet weak var clearButton: UIButton!
+    @IBOutlet weak var plusMinusButton: UIButton!
+    @IBOutlet weak var percentButton: UIButton!
+    
     
     
 
@@ -42,10 +45,9 @@ class ViewController: UIViewController {
     }
     
     // method that executes when the clear button is pressed
-    @IBAction func clearButtonPressed(_ sender: UIButton) {
-        
-        
+    @IBAction func clearButtonPressed(_ sender: Any) {
     }
+    
     
     
     
