@@ -45,8 +45,10 @@ class ViewController: UIViewController {
     }
     
     // method that executes when the clear button is pressed
-    @IBAction func clearButtonPressed(_ sender: Any) {
+    @IBAction func clearButtonPressed(_ sender: UIButton) {
+        
     }
+    
     
     
     
