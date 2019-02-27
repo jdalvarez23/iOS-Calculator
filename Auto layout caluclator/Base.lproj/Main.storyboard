@@ -287,6 +287,7 @@
                     <connections>
                         <outlet property="clearButton" destination="BxK-YO-5hD" id="HQa-bL-azU"/>
                         <outlet property="decimalButton" destination="QQD-7c-zK8" id="K9k-ZI-Xp7"/>
+                        <outlet property="numberDisplay" destination="wS1-oO-wEF" id="yml-jv-vf1"/>
                         <outlet property="percentButton" destination="uX8-II-N8w" id="UDv-h2-LlE"/>
                         <outlet property="plusMinusButton" destination="oQJ-y2-beg" id="0ct-g8-DNW"/>
                         <outletCollection property="numberButtons" destination="pJV-01-40a" collectionClass="NSMutableArray" id="qoi-2C-Din"/>
