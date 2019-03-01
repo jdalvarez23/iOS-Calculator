@@ -3,7 +3,7 @@
 //  Auto layout caluclator
 //
 //  Created by student9 on 2/9/19.
-//  Copyright © 2019 Erica Bermudez. All rights reserved.
+//  Copyright © 2019 Jose Alvarez. All rights reserved.
 //
 
 import UIKit
@@ -21,10 +21,7 @@ class ViewController: UIViewController {
     // initialize storyboard components
     @IBOutlet var numberButtons: [UIButton]!
     @IBOutlet var functionButtons: [UIButton]!
-    @IBOutlet weak var decimalButton: UIButton!
     @IBOutlet weak var clearButton: UIButton!
-    @IBOutlet weak var plusMinusButton: UIButton!
-    @IBOutlet weak var percentButton: UIButton!
     @IBOutlet weak var numberDisplay: UILabel!
     
     
@@ -43,7 +40,7 @@ class ViewController: UIViewController {
         print("Number pressed:", number)
         
         // insert call to update user interface here
-        
+        updateUserInterface(value: Double(number) ?? 0)
         
         if (calculationArray.count > 0) {
             
@@ -60,6 +57,9 @@ class ViewController: UIViewController {
             print("New number:", arrayNumber)
             
             calculationArray[arrayIndex] = arrayNumber // push modified arrayNumber to the array
+            
+            // call method to update the user interface
+            updateUserInterface(value: Double(arrayNumber) ?? 0)
             
             
         } else {
@@ -110,12 +110,21 @@ class ViewController: UIViewController {
             if (mathExpression == "=") {
                 print("Executing TOTAL math expression")
                 
-                // call method that calculates the total
-                total(firstNumber: calculationArray[0], secondNumber: calculationArray[1], expression: executeCalculation[0])
-                
-                executeCalculation.removeAll() // remove all calculations inserted into executeCalculation array
-                
-                functionsPressedTwice = false // default back to false
+                if (calculationArray.indices.contains(0) && calculationArray.indices.contains(1) && executeCalculation.indices.contains(0)) {
+                    
+                    print("All exist")
+                    
+                    // call method that calculates the total
+                    total(firstNumber: calculationArray[0], secondNumber: calculationArray[1], expression: executeCalculation[0])
+                    
+                    executeCalculation.removeAll() // remove all calculations inserted into executeCalculation array
+                    
+                    functionsPressedTwice = false // default back to false
+                    
+                    
+                } else {
+                    print("Not sure what to do here")
+                }
                 
                 
                 
@@ -193,6 +202,56 @@ class ViewController: UIViewController {
         
     }
     
+    // method that executes when the percent button is pressed
+    @IBAction func percentButtonPressed(_ sender: UIButton) {
+    
+        print("Make current number a decimal")
+        
+        /* update value in calculation array */
+        if (calculationArray.count > 0) {
+            
+            let arrayIndex = checkArray(numberArray: calculationArray)
+            
+            // retrieve the number
+            let arrayNumber = calculationArray[arrayIndex] // retrieve the value from the array at index
+            
+            print("Number from array:", arrayNumber)
+            
+            let percentNumber = (Double(arrayNumber) ?? 0) / 100
+            
+            calculationArray[arrayIndex] = String(percentNumber) // push modified arrayNumber to the array
+            
+            print("New % number is:", calculationArray[arrayIndex])
+            
+            // call method that displays the new value
+            updateUserInterface(value: percentNumber)
+            
+            
+        } else {
+            // what to do?
+            print("What to do?")
+            
+            if let number = numberDisplay.text {
+                
+                print("Number in display is:", number)
+                
+                if (number != "0") {
+                    let newNumber = (Double(number) ?? 0) / 100
+                    
+                    calculationArray.append(String(newNumber))
+                    
+                    // call method that displays the new value
+                    updateUserInterface(value: newNumber)
+                }
+                
+                
+            }
+            
+        }
+        
+    }
+    
+    
     // method that executes when the decimal button is pressed
     @IBAction func decimalButtonPressed(_ sender: UIButton) {
         
@@ -246,6 +305,7 @@ class ViewController: UIViewController {
         print("The total is:", total)
         
         // insert call to update user interface here
+        updateUserInterface(value: total)
 
         /* [NOTE] We can actually remove the following two lines and simply display the number in the label and if the user justs presses a function button then we can add the number in the label back to the calculations array */
         
@@ -261,7 +321,22 @@ class ViewController: UIViewController {
     
     func updateUserInterface(value: Double) {
         
+        // numberDisplay.text = String(value)
+        
         // check to see if value (as a Double) is a whole number or a decimal number
+        if (value.truncatingRemainder(dividingBy: 1) == 0) {
+            // the value is an integer
+            
+            let integerNumber = Int(value)
+            
+            numberDisplay.text = String(integerNumber)
+            
+        } else {
+            // the value is a double
+            
+            numberDisplay.text = String(format: "%0.2f", value)
+            
+        }
         
         
     }
